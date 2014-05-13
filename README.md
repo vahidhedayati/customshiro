@@ -1,0 +1,1 @@
+CustomShiro is a grails project which shows how to use apache shiro with various LDAP/Active Directory authentication mechanisms. It also shows how to keep user logged in for a defined period and how to remove cookies from users machine 
