@@ -17,9 +17,9 @@ class LdapService {
 	 * Find an LDAP context
 	 * @return context
 	 */
-	def findContext(String authtype) {
+	def findContext(String authProvider) {
 		def ctx
-		def ldapUrls = grailsApplication.config."${authtype}".servers
+		def ldapUrls = grailsApplication.config."${authProvider}".servers
 		
 		def env = new Hashtable()
 		env[Context.INITIAL_CONTEXT_FACTORY] = 'com.sun.jndi.ldap.LdapCtxFactory'
@@ -53,12 +53,12 @@ class LdapService {
 	}
 
 
-	def findUserInfo (Context ctx,  String username,String authtype) {
+	def findUserInfo (Context ctx,  String username,String authProvider) {
 		StringBuilder sb=new StringBuilder()
 		sb.append('<br>')
 		try {
 			def roleNames=[]
-			def searchBase=grailsApplication.config."${authtype}".base
+			def searchBase=grailsApplication.config."${authProvider}".base
 			SearchControls searchCtls = new SearchControls()
 			searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE)
 			String searchFilter = '(&(objectClass=user)(!(objectClass=computer))(sAMAccountName={0}))'
@@ -135,8 +135,8 @@ class LdapService {
 		return sb.toString()
 	}
 
-	def findUser(Context ctx,  String username,String authtype) {
-		def searchBase=grailsApplication.config."${authtype}".base
+	def findUser(Context ctx,  String username,String authProvider) {
+		def searchBase=grailsApplication.config."${authProvider}".base
 		SearchControls searchCtls = new SearchControls()
 		searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE)
 		String searchFilter = '(&(objectClass=user)(!(objectClass=computer))(sAMAccountName={0}))'

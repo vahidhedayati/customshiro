@@ -37,7 +37,7 @@ class MyCompaniesRealm {
 		}
 		def ctx,serverInfo,result
 		try {
-			serverInfo=ldapService.findContext(authToken.customId)
+			serverInfo=ldapService.findContext(authToken.authProvider)
 			if (!serverInfo) {
 				def msg = 'No LDAP server available'
 				log.error msg
@@ -48,7 +48,7 @@ class MyCompaniesRealm {
 			if (log.isDebugEnabled()) {
 				log.debug "Using LDAP server ${url}"
 			}
-			result = ldapService.findUserInfo(ctx,authToken.username,authToken.customId)
+			result = ldapService.findUserInfo(ctx,authToken.username,authToken.authProvider)
 			// Ensure context is always closed
 		}finally {
 			try {
@@ -71,7 +71,7 @@ class MyCompaniesRealm {
 		def ctx,serverInfo
 		try {
 			
-			serverInfo=ldapService.findContext(authToken.customId)
+			serverInfo=ldapService.findContext(authToken.authProvider)
 			if (!serverInfo) {
 				def msg = 'No LDAP server available'
 				log.error msg
@@ -82,7 +82,7 @@ class MyCompaniesRealm {
 			if (log.isDebugEnabled()) {
 				log.debug "Using LDAP server ${url}"
 			}
-			def result = ldapService.findUser(ctx,authToken.username,authToken.customId)
+			def result = ldapService.findUser(ctx,authToken.username,authToken.authProvider)
 			if (!result.hasMore()) {
 				throw new UnknownAccountException("No account found for user ${authToken.username}")
 			}

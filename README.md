@@ -42,3 +42,13 @@ This contains a custom Token which now includes our own authProviders being pass
 
 
 
+#### grails-app/realms/MyCompaniesRealm.groovy
+this is our shiro realm configuration for LDAP/AD
+
+
+#### grails-app/services/customshiro/security/LdapService.groovy
+This is our LDAPService which works alongside above realm
+
+
+#### grails-app/domain/customshiro/MyToken.groovy
+unsused feature - a way of overriding authenticationToken which is a way of defining a new method of authenticating if it superseeds the requirements of usernamePassword token i.e. authentication with just a username (no password) or email or anything else.
