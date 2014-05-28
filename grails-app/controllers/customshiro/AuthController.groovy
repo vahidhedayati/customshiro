@@ -98,6 +98,17 @@ class AuthController {
 			if (log.isDebugEnabled()) {
 				log.debug "principal for ${cmd.username}=${userid}"
 			}
+			
+			/*
+			 * 	To get hold of the authProvider at a later point simply execute this
+			 * 
+			 *	def provider=SecurityUtils.subject.session.getAttribute('authProvider')
+			 *	println provider
+			 *	
+			 *	
+			 */
+
+
 			session.user=userid
 			render(template:"welcomeMessage")
 			if (log.isDebugEnabled()) {
